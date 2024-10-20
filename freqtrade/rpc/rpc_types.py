@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any, List, Literal, Optional, TypedDict, Union
+from typing import Any, Literal, Optional, TypedDict, Union
 
 from freqtrade.constants import PairWithTimeframe
 from freqtrade.enums import RPCMessageType
@@ -15,12 +15,14 @@ class RPCSendMsgBase(TypedDict):
 
 class RPCStatusMsg(RPCSendMsgBase):
     """Used for Status, Startup and Warning messages"""
+
     type: Literal[RPCMessageType.STATUS, RPCMessageType.STARTUP, RPCMessageType.WARNING]
     status: str
 
 
 class RPCStrategyMsg(RPCSendMsgBase):
     """Used for Status, Startup and Warning messages"""
+
     type: Literal[RPCMessageType.STRATEGY_MSG]
     msg: str
 
@@ -41,7 +43,7 @@ class RPCProtectionMsg(RPCSendMsgBase):
 
 class RPCWhitelistMsg(RPCSendMsgBase):
     type: Literal[RPCMessageType.WHITELIST]
-    data: List[str]
+    data: list[str]
 
 
 class __RPCEntryExitMsgBase(RPCSendMsgBase):
@@ -108,12 +110,14 @@ class _AnalyzedDFData(TypedDict):
 
 class RPCAnalyzedDFMsg(RPCSendMsgBase):
     """New Analyzed dataframe message"""
+
     type: Literal[RPCMessageType.ANALYZED_DF]
     data: _AnalyzedDFData
 
 
 class RPCNewCandleMsg(RPCSendMsgBase):
     """New candle ping message, issued once per new candle/pair"""
+
     type: Literal[RPCMessageType.NEW_CANDLE]
     data: PairWithTimeframe
 
@@ -131,5 +135,5 @@ RPCSendMsg = Union[
     RPCExitMsg,
     RPCExitCancelMsg,
     RPCAnalyzedDFMsg,
-    RPCNewCandleMsg
-    ]
+    RPCNewCandleMsg,
+]
